@@ -1,17 +1,28 @@
+<?php
+if (isset($_REQUEST["login"])) {
+    $sArchivoLogin = "./codigoPHP/login.php";
+    header("Location: $sArchivoLogin");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Jesús Temprano Gallego</title>
+    <title>Jesús Temprano Gallego - Login Logoff Tema 5 - inicio</title>
     <link rel="stylesheet" href="./webroot/css/style.css">
+    <link rel="stylesheet" href="./webroot/css/forms.css">
 </head>
 <body>
     <!-- 😼 -->
     <header>
-        <h1>Login Logoff Tema 5</h1>
+        <h1>Login Logoff Tema 5</h1><h2>Inicio Publico</h2>
     </header>
     <!-- 😼 -->
     <main>
+        <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+            <input type="submit" value="Iniciar Sesion" name="login">
+        </form>
     </main>
     <!-- 😼 -->
     <footer>
