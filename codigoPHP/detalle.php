@@ -31,6 +31,29 @@ if (isset($_REQUEST["cerrarSesion"])) {
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
             <input type="submit" value="Volver" name="volver">
         </form>
+        <?php
+            $variablesSuperglobales = [
+                '_SERVER' => $_SERVER,
+                '_GET' => $_GET,
+                '_POST' => $_POST,
+                '_FILES' => $_FILES,
+                '_COOKIE' => $_COOKIE,
+                '_SESSION' => $_SESSION ?? [], // Lo crea si no esta creado
+                '_REQUEST' => $_REQUEST,
+                '_ENV' => $_ENV
+            ];
+            foreach ($variablesSuperglobales as $nombresVariables=>$variables) {
+                echo "<div class='center $nombresVariables'>";
+                echo "<h2>" . $nombresVariables . "</h2>";
+                echo "<table><tr>";
+                foreach ($variables as $valor => $datos) {
+                    echo '<tr><td class="e">'.$valor.'</td><td class="v">'.$datos.'</td></tr>';
+                }
+                echo "</tr></table>";
+                echo "</div>";
+            }
+            echo "<div>".phpinfo()."</div>";
+        ?>
     </main>
     <!-- 😼 -->
     <footer>
@@ -41,5 +64,11 @@ if (isset($_REQUEST["cerrarSesion"])) {
     </footer>
     <!-- 😼 -->
     <!-- muxixima glasia alvelto pol el marivilliosiximo achetemeele que te paxo chatgepete -->
+     <script>
+         document.body.getElementsByTagName("style")[0].remove();
+         window.addEventListener("DOMContentLoaded", () => {
+            document.body.getElementsByTagName("style")[0].remove();
+        });
+     </script>
 </body>
 </html>
