@@ -21,7 +21,9 @@ if (isset($_REQUEST["login"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
-            <input type="submit" value="Iniciar Sesion" name="login">
+            <div>
+                <input type="submit" value="Iniciar Sesion" name="login">
+            </div>
         </form>
     </main>
     <!-- 😼 -->

@@ -31,8 +31,10 @@ if (isset($_REQUEST["cancelar"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+            <div>
             <input type="submit" value="Entrar" name="entrar">
             <input type="submit" value="Cancelar" name="cancelar">
+            </div>
             </form>
     </main>
     <!-- 😼 -->

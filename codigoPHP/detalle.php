@@ -29,7 +29,9 @@ if (isset($_REQUEST["cerrarSesion"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
-            <input type="submit" value="Volver" name="volver">
+            <div>
+                <input type="submit" value="Volver" name="volver">
+            </div>
         </form>
         <?php
             $variablesSuperglobales = [

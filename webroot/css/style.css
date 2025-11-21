@@ -170,3 +170,4 @@ form {
     text-align: center;
     margin: 0;
 }
+*[class^=error] {color: red;}

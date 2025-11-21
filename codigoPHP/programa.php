@@ -29,8 +29,10 @@ if (isset($_REQUEST["cerrarSesion"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
-            <input type="submit" value="Detalle" name="detalle">
-            <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
+            <div>
+                <input type="submit" value="Detalle" name="detalle">
+                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
+            </div>
         </form>
     </main>
     <!-- 😼 -->
