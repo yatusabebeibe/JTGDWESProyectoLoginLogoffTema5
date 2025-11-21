@@ -1,0 +1,45 @@
+main:has(form) {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    & form > label {width: 10rem; text-align: left;}
+}
+form {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+input:not([type="submit"]):not([type="button"]):not([type="checkbox"]) {
+    max-width: 10rem;
+    max-height: 1.3rem;
+    line-height: 1.3rem;
+    margin-bottom: 1rem;
+}
+input:last-of-type:not([type="submit"]):not([type="button"]):not([type="checkbox"]) {
+    margin-bottom: .5rem;
+}
+input[type="submit"] {
+    background-color: #70bc1a;
+    padding: 5px; margin: 0 10px;
+    color: black;
+    cursor: pointer;
+    min-width: 60px;
+
+    border-radius: 5px;
+    border: 2px solid #459650;
+    transition: all .3s ease-in-out;
+}
+input[type="submit"]:hover {
+    color: white;
+    background-color: hsl(88, 76%, 35%);
+    border: 2px solid hsl(128, 37%, 35%);
+    transform: scale(1.05);
+}
+form > span + div {margin-top: 0.5rem;}
+form > span.error, form > span.error:empty {
+    display: inline-block;
+    height: 1rem;
+    min-height: 1rem;
+    font-size: 1rem;
+    padding: 0;
+}

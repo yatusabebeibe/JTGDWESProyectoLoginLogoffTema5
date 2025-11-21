@@ -1,24 +1,37 @@
+<?php
+if (isset($_REQUEST["login"])) {
+    $sArchivoLogin = "./codigoPHP/login.php";
+    header("Location: $sArchivoLogin");
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Jesús Temprano Gallego</title>
+    <title>Jesús Temprano Gallego - Login Logoff Tema 5 - inicio</title>
     <link rel="stylesheet" href="./webroot/css/style.css">
+    <link rel="stylesheet" href="./webroot/css/forms.css">
 </head>
 <body>
     <!-- 😼 -->
     <header>
-        <h1>CFGS - Desarrollo de Aplicaciones Web</h1>
-        <h3>Jesús Temprano Gallego</h3>
-        <p>Curso 2025/2026 - Grupo DAW2</p>
+        <h1>Login Logoff Tema 5</h1><h2>Inicio Publico</h2>
     </header>
     <!-- 😼 -->
     <main>
+        <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+            <div>
+                <input type="submit" value="Iniciar Sesion" name="login">
+            </div>
+        </form>
     </main>
     <!-- 😼 -->
     <footer>
+        <span><a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoff/" target="_blank">
+            <img src="./webroot/images/github.svg">
+        </a></span>
         <p><a href="../../" target="_self">Jesús Temprano Gallego</a> | 20/11/2025</p>
-        <p><a href="https://github.com/yatusabebeibe" target="_blank">Github</a><b>: </b><a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoff/" target="_blank">Rama master</a><b> | </b><a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoff/tree/developerJTG" target="_blank">Rama developer</a></p>
     </footer>
     <!-- 😼 -->
     <!-- muxixima glasia alvelto pol el marivilliosiximo achetemeele que te paxo chatgepete -->
