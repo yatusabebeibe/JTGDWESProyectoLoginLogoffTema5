@@ -4,13 +4,60 @@
  *  @since 20/11/2025
  */
 
-if (isset($_REQUEST["entrar"])) {
-    header("Location: ./programa.php");
-    exit;
-}
 if (isset($_REQUEST["cancelar"])) {
     header("Location: ../");
     exit;
+}
+
+$encontrado = false;
+$aRespuestas = ["usuario"=>"","contraseña"=>""];
+$aErrores = ["login"=>""];
+if (isset($_REQUEST["entrar"])) {
+    require_once("../config/confDBPDO.php");
+
+    try {
+        $miDB = new PDO(DSN, DBUser, DBPass);
+
+        $aColABuscar = [
+            aColumnasUsuario["Descripcion"]
+        ];
+        $sColABuscar = implode(",",$aColABuscar);
+        $sColUsuario = aColumnasUsuario["Codigo"];
+        $sColContraseña = aColumnasUsuario["Password"];
+
+        $query = <<<EOF
+        SELECT $sColABuscar FROM T01_Usuario
+        WHERE
+            $sColUsuario = :usuario
+            AND
+            $sColContraseña = SHA2(:contrasenia, 256);
+        EOF;
+
+        $consulta = $miDB->prepare($query);
+
+        $parametros = [
+            ":usuario" => $usuario ?? "",
+            ":contrasenia" => $usuario.$contraseña ?? ""
+        ];
+
+        $consulta->execute($parametros);
+
+        if ($consulta->rowCount() >= 1) {
+            $encontrado = true;
+            $fila = $consulta->fetch(PDO::FETCH_NUM);
+            $sNombreUsuario = $fila[0];
+            header("Location: ./programa.php");
+            exit;
+        } else {
+            $aErrores["login"] = "Usuario o contraseña incorrectos.";
+        }
+
+    } catch (PDOException $error) {
+        unset($miDB);
+        echo '<h3 class="error">ERROR SQL:</h3>';
+        echo '<p class="error"><strong>Mensaje:</strong> '.$error->getMessage()."</p>";
+        echo '<p class="error"><strong>Codigo:</strong> '.$error->getCode()."</p>";
+    }
 }
 
 
@@ -31,11 +78,21 @@ if (isset($_REQUEST["cancelar"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+            <label class="tituloCampo">Usuario:</label>
+            <!-- Ponemos los valores del array respuesta para que el usuario no tenga que escribirlo de nuevo en caso de error -->
+            <input type="text" name="usuario" value="<?= $encontrado ? "" : $aRespuestas['usuario'] ?>" obligatorio>
+            
+            <label class="tituloCampo">Contraseña:</label>
+            <!-- Ponemos los valores del array respuesta para que el usuario no tenga que escribirlo de nuevo en caso de error -->
+            <input type="password" name="contraseña" value="<?= $encontrado ? "" : $aRespuestas['contraseña'] ?>" obligatorio>
+
+            <span class="error"><?= $aErrores["login"] ?></span>
+
             <div>
-            <input type="submit" value="Entrar" name="entrar">
-            <input type="submit" value="Cancelar" name="cancelar">
+                <input type="submit" value="Entrar" name="entrar">
+                <input type="submit" value="Cancelar" name="cancelar">
             </div>
-            </form>
+        </form>
     </main>
     <!-- 😼 -->
     <footer>
