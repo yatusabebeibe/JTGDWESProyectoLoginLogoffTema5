@@ -15,6 +15,9 @@ $aErrores = ["login"=>""];
 if (isset($_REQUEST["entrar"])) {
     require_once("../config/confDBPDO.php");
 
+    $aRespuestas["usuario"] = $_REQUEST["usuario"];
+    $aRespuestas["contraseña"] = $_REQUEST["contraseña"];
+
     try {
         $miDB = new PDO(DSN, DBUser, DBPass);
 
@@ -36,8 +39,8 @@ if (isset($_REQUEST["entrar"])) {
         $consulta = $miDB->prepare($query);
 
         $parametros = [
-            ":usuario" => $usuario ?? "",
-            ":contrasenia" => $usuario.$contraseña ?? ""
+            ":usuario" => $aRespuestas["usuario"] ?? "",
+            ":contrasenia" => $aRespuestas["usuario"].$aRespuestas["contraseña"] ?? ""
         ];
 
         $consulta->execute($parametros);
