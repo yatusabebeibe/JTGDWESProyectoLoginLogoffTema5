@@ -20,6 +20,9 @@ if (isset($_REQUEST["cerrarSesion"])) {
     <title>Jesús Temprano Gallego - Login Logoff Tema 5 - detalle</title>
     <link rel="stylesheet" href="../webroot/css/style.css">
     <link rel="stylesheet" href="../webroot/css/forms.css">
+    <style>
+        .center {max-width: 100%;}
+    </style>
 </head>
 <body>
     <!-- 😼 -->
