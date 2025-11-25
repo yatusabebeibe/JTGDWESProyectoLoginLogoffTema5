@@ -4,12 +4,12 @@ if (isset($_REQUEST["login"])) {
     header("Location: $sArchivoLogin");
 }
 if (!empty($_REQUEST["idioma"])) {
-    setcookie("idioma", $_REQUEST["idioma"], 60*60);
+    setcookie("idioma", $_REQUEST["idioma"], time() + 60*60);
     header("Location: .");
     exit;
 }
 if (empty($_COOKIE["idioma"])) {
-    setcookie("idioma", "ES", 60*60);
+    setcookie("idioma", "ES", time() + 60*60);
     header("Location: " . $_SERVER["PHP_SELF"]);
 }
 ?>

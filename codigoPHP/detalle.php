@@ -21,7 +21,7 @@ if (isset($_REQUEST["cerrarSesion"])) {
     exit;
 }
 if (empty($_COOKIE["idioma"])) {
-    setcookie("idioma", "ES", 60*60);
+    setcookie("idioma", "ES", time() + 60*60);
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
