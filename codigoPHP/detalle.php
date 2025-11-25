@@ -40,7 +40,13 @@ if (empty($_COOKIE["idioma"])) {
 <body>
     <!-- 😼 -->
     <header>
-        <h1>Login Logoff Tema 5</h1><h2>Detalle</h2>
+        <h1>Login Logoff Tema 5</h1>
+        <h2>Detalle</h2>
+        <div>
+            <form id="login" action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
+            </form>
+        </div>
     </header>
     <!-- 😼 -->
     <main>
