@@ -29,11 +29,19 @@ input[type="submit"] {
     border: 2px solid #459650;
     transition: all .3s ease-in-out;
 }
+form#login > input[name="cerrarSesion"] {
+    background-color: red;
+    border-color: brown;
+}
 input[type="submit"]:hover {
     color: white;
     background-color: hsl(88, 76%, 35%);
     border: 2px solid hsl(128, 37%, 35%);
     transform: scale(1.05);
+}
+form#login > input[name="cerrarSesion"]:hover {
+    background-color: rgb(175, 0, 0);
+    border-color: rgb(100, 42, 42);
 }
 form > span + div {margin-top: 0.5rem;}
 form > span.error, form > span.error:empty {
