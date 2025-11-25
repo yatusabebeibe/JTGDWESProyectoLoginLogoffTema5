@@ -1,4 +1,0 @@
-USE DBJTGDWESProyectoLoginLogoffTema5;
-
-DROP TABLE IF EXISTS T01_Usuario;
-DROP TABLE IF EXISTS T02_Departamento;
