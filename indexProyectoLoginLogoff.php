@@ -16,15 +16,16 @@ if (isset($_REQUEST["login"])) {
 <body>
     <!-- 😼 -->
     <header>
-        <h1>Login Logoff Tema 5</h1><h2>Inicio Publico</h2>
+        <h1>Login Logoff Tema 5</h1>
+        <h2>Inicio Publico</h2>
+        <div style="text-align: center;">
+            <form id="login" action=<?= $_SERVER["PHP_SELF"];?> method="post">
+                <input type="submit" value="Iniciar Sesion" name="login">
+            </form>
+        </div>
     </header>
     <!-- 😼 -->
     <main>
-        <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
-            <div>
-                <input type="submit" value="Iniciar Sesion" name="login">
-            </div>
-        </form>
     </main>
     <!-- 😼 -->
     <footer>

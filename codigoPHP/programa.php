@@ -24,14 +24,19 @@ if (isset($_REQUEST["cerrarSesion"])) {
 <body>
     <!-- 😼 -->
     <header>
-        <h1>Login Logoff Tema 5</h1><h2>Programa</h2>
+        <h1>Login Logoff Tema 5</h1>
+        <h2>Programa</h2>
+        <div>
+            <form id="login" action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
+            </form>
+        </div>
     </header>
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
             <div>
                 <input type="submit" value="Detalle" name="detalle">
-                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
             </div>
         </form>
     </main>
