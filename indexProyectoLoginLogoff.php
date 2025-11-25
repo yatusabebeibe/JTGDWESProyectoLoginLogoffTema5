@@ -3,6 +3,14 @@ if (isset($_REQUEST["login"])) {
     $sArchivoLogin = "./codigoPHP/login.php";
     header("Location: $sArchivoLogin");
 }
+if (!empty($_REQUEST["idioma"])) {
+    setcookie("idioma", $_REQUEST["idioma"]);
+    header("Location: .");
+    exit;
+}
+if (empty($_COOKIE["idioma"])) {
+    setcookie("idioma", "ES");
+}
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +27,27 @@ if (isset($_REQUEST["login"])) {
         <h1>Login Logoff Tema 5</h1>
         <h2>Inicio Publico</h2>
         <div style="text-align: center;">
+            <form id="idiomas" method="post">
+                <label for="ES"><img src="./webroot/images/flags/ES.png" alt="Español"></label>
+                <input type="radio" name="idioma" id="ES" value="ES">
+
+                <label for="EN"><img src="./webroot/images/flags/EN.png" alt="Inglés"></label>
+                <input type="radio" name="idioma" id="EN" value="EN">
+
+                <label for="JP"><img src="./webroot/images/flags/JP.png" alt="Japonés"></label>
+                <input type="radio" name="idioma" id="JP" value="JP">
+            </form>
+            <script>
+                /* document.querySelectorAll('#idiomas > label[for]').forEach(label => {
+                    label.addEventListener('click', () => {
+                        document.getElementById('idiomas').submit();
+                    });
+                }); */
+                const form = document.getElementById('idiomas');
+                document.querySelectorAll('input[name="idioma"]').forEach(radio => {
+                radio.addEventListener('change', () => form.submit());
+                });
+            </script>
             <form id="login" action=<?= $_SERVER["PHP_SELF"];?> method="post">
                 <input type="submit" value="Iniciar Sesion" name="login">
             </form>

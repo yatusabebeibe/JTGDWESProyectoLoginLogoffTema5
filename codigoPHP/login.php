@@ -8,6 +8,11 @@ if (isset($_REQUEST["cancelar"])) {
     header("Location: ../");
     exit;
 }
+if (empty($_COOKIE["idioma"])) {
+    setcookie("idioma", "ES");
+    header("Location: " . $_SERVER["PHP_SELF"]);
+    exit;
+}
 
 $encontrado = false;
 $aRespuestas = ["usuario"=>"","contraseña"=>""];

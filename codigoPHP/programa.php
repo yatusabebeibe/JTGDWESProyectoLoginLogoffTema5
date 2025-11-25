@@ -12,6 +12,30 @@ if (isset($_REQUEST["cerrarSesion"])) {
     header("Location: ../");
     exit;
 }
+
+if (empty($_COOKIE["idioma"])) {
+    setcookie("idioma", "ES");
+    header("Location: " . $_SERVER["PHP_SELF"]);
+    exit;
+}
+
+$bienvenido="";
+if (!empty($_COOKIE["idioma"])) {
+    switch ($_COOKIE["idioma"]) {
+        case 'ES':
+            $bienvenido="Bienvenido";
+            break;
+        case 'EN':
+            $bienvenido="Welcome";
+            break;
+        case 'JP':
+            $bienvenido="ようこそ";
+            break;
+        default:
+            $bienvenido="Bienvenido";
+            break;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,6 +59,7 @@ if (isset($_REQUEST["cerrarSesion"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+            <h2><?= $bienvenido ?></h2>
             <div>
                 <input type="submit" value="Detalle" name="detalle">
             </div>

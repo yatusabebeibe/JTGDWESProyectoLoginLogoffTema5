@@ -11,6 +11,11 @@ if (isset($_REQUEST["volver"])) {
 if (isset($_REQUEST["cerrarSesion"])) {
     header("Location: ../");
     exit;
+    if (empty($_COOKIE["idioma"])) {
+}
+    setcookie("idioma", "ES");
+    header("Location: " . $_SERVER["PHP_SELF"]);
+    exit;
 }
 ?>
 <!DOCTYPE html>

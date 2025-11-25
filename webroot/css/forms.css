@@ -43,3 +43,32 @@ form > span.error, form > span.error:empty {
     font-size: 1rem;
     padding: 0;
 }
+header div:has(#idiomas ~ #login) {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    flex-flow: column nowrap;
+}
+form#login {
+    display: flex;
+    width: fit-content;
+    max-width: max-content;
+    align-items: center;
+}
+form#idiomas {
+    display: flex;
+    flex-direction: row;
+    height: 20px;
+    line-height: 15px;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+
+    & input {display: none;}
+    & label {height: 15px; display: block;}
+    & img {
+        height: 15px;
+        /* margin: 0 5px; */
+        cursor: pointer;
+    }
+}
