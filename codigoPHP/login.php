@@ -18,6 +18,8 @@ if (empty($_COOKIE["idioma"])) {
 if (!empty($_SESSION["usuario"])) {
     header("Location: ./programa.php");
     exit;
+} else {
+    session_abort();
 }
 
 $encontrado = false;
