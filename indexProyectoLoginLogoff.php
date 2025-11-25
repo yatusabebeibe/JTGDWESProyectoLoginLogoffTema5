@@ -2,6 +2,7 @@
 if (isset($_REQUEST["login"])) {
     $sArchivoLogin = "./codigoPHP/login.php";
     header("Location: $sArchivoLogin");
+    exit;
 }
 if (!empty($_REQUEST["idioma"])) {
     setcookie("idioma", $_REQUEST["idioma"], time() + 60*60);
@@ -11,6 +12,7 @@ if (!empty($_REQUEST["idioma"])) {
 if (empty($_COOKIE["idioma"])) {
     setcookie("idioma", "ES", time() + 60*60);
     header("Location: " . $_SERVER["PHP_SELF"]);
+    exit;
 }
 ?>
 
