@@ -4,9 +4,22 @@
  *  @since 20/11/2025
  */
 
+session_start();
+
 if (isset($_REQUEST["cancelar"])) {
     header("Location: ../");
     exit;
+}
+if (empty($_COOKIE["idioma"])) {
+    setcookie("idioma", "ES", time() + 60*60);
+    header("Location: " . $_SERVER["PHP_SELF"]);
+    exit;
+}
+if (!empty($_SESSION["usuario"])) {
+    header("Location: ./programa.php");
+    exit;
+} else {
+    session_abort();
 }
 
 $encontrado = false;
@@ -15,11 +28,19 @@ $aErrores = ["login"=>""];
 if (isset($_REQUEST["entrar"])) {
     require_once("../config/confDBPDO.php");
 
+    $aRespuestas["usuario"] = $_REQUEST["usuario"];
+    $aRespuestas["contraseña"] = $_REQUEST["contraseña"];
+
     try {
         $miDB = new PDO(DSN, DBUser, DBPass);
 
         $aColABuscar = [
-            aColumnasUsuario["Descripcion"]
+            aColumnasUsuario["Codigo"],
+            aColumnasUsuario["Password"],
+            aColumnasUsuario["Descripcion"],
+            aColumnasUsuario["NumConexiones"],
+            aColumnasUsuario["UltimaConexion"],
+            "NOW() as conexionActual"
         ];
         $sColABuscar = implode(",",$aColABuscar);
         $sColUsuario = aColumnasUsuario["Codigo"];
@@ -36,16 +57,35 @@ if (isset($_REQUEST["entrar"])) {
         $consulta = $miDB->prepare($query);
 
         $parametros = [
-            ":usuario" => $usuario ?? "",
-            ":contrasenia" => $usuario.$contraseña ?? ""
+            ":usuario" => $aRespuestas["usuario"] ?? "",
+            ":contrasenia" => ($aRespuestas["usuario"].$aRespuestas["contraseña"]) ?? ""
         ];
 
         $consulta->execute($parametros);
 
         if ($consulta->rowCount() >= 1) {
             $encontrado = true;
-            $fila = $consulta->fetch(PDO::FETCH_NUM);
-            $sNombreUsuario = $fila[0];
+            $usuario = $consulta->fetchObject();
+
+            session_start();
+
+            $_SESSION["usuario"] = $usuario->{aColumnasUsuario["Codigo"]};
+            $_SESSION["descripcion"] = $usuario->{aColumnasUsuario["Descripcion"]};
+            $_SESSION["numConexiones"] = $usuario->{aColumnasUsuario["NumConexiones"]}+1;
+            $_SESSION["ultimaConexion"] = $usuario->{aColumnasUsuario["UltimaConexion"]};
+            $_SESSION["conexionActual"] = $usuario->{"conexionActual"};
+
+            $actualizacion = <<<EOF
+            UPDATE T01_Usuario
+            SET
+                T01_FechaHoraUltimaConexion = NOW(),
+                T01_NumConexiones = T01_NumConexiones + 1
+            WHERE T01_CodUsuario = :usuario ;
+            EOF;
+
+            $consulta = $miDB->prepare($actualizacion);
+            $consulta->execute([":usuario" => $aRespuestas["usuario"] ?? ""]);
+            
             header("Location: ./programa.php");
             exit;
         } else {

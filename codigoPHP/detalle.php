@@ -4,12 +4,25 @@
  *  @since 20/11/2025
  */
 
+session_start();
+
+if (empty($_SESSION["usuario"])) {
+    session_destroy();
+    header("Location: ./login.php");
+    exit;
+}
 if (isset($_REQUEST["volver"])) {
     header("Location: ./programa.php");
     exit;
 }
 if (isset($_REQUEST["cerrarSesion"])) {
+    session_destroy();
     header("Location: ../");
+    exit;
+}
+if (empty($_COOKIE["idioma"])) {
+    setcookie("idioma", "ES", time() + 60*60);
+    header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
 ?>
@@ -20,11 +33,20 @@ if (isset($_REQUEST["cerrarSesion"])) {
     <title>Jesús Temprano Gallego - Login Logoff Tema 5 - detalle</title>
     <link rel="stylesheet" href="../webroot/css/style.css">
     <link rel="stylesheet" href="../webroot/css/forms.css">
+    <style>
+        .center {max-width: 100%;}
+    </style>
 </head>
 <body>
     <!-- 😼 -->
     <header>
-        <h1>Login Logoff Tema 5</h1><h2>Detalle</h2>
+        <h1>Login Logoff Tema 5</h1>
+        <h2>Detalle</h2>
+        <div>
+            <form id="login" action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
+            </form>
+        </div>
     </header>
     <!-- 😼 -->
     <main>
@@ -35,13 +57,13 @@ if (isset($_REQUEST["cerrarSesion"])) {
         </form>
         <?php
             $variablesSuperglobales = [
+                '_SESSION' => $_SESSION ?? [], // Lo crea si no esta creado
+                '_COOKIE' => $_COOKIE,
                 '_SERVER' => $_SERVER,
+                '_REQUEST' => $_REQUEST,
                 '_GET' => $_GET,
                 '_POST' => $_POST,
                 '_FILES' => $_FILES,
-                '_COOKIE' => $_COOKIE,
-                '_SESSION' => $_SESSION ?? [], // Lo crea si no esta creado
-                '_REQUEST' => $_REQUEST,
                 '_ENV' => $_ENV
             ];
             foreach ($variablesSuperglobales as $nombresVariables=>$variables) {

@@ -4,13 +4,46 @@
  *  @since 20/11/2025
  */
 
+session_start();
+
+if (empty($_SESSION["usuario"])) {
+    session_destroy();
+    header("Location: ./login.php");
+    exit;
+}
 if (isset($_REQUEST["detalle"])) {
     header("Location: ./detalle.php");
     exit;
 }
 if (isset($_REQUEST["cerrarSesion"])) {
+    session_destroy();
     header("Location: ../");
     exit;
+}
+
+if (empty($_COOKIE["idioma"])) {
+    setcookie("idioma", "ES", time() + 60*60);
+    header("Location: " . $_SERVER["PHP_SELF"]);
+    exit;
+}
+
+$bienvenido="";
+if (!empty($_COOKIE["idioma"])) {
+    switch ($_COOKIE["idioma"]) {
+        case 'ES':
+            $bienvenido="Bienvenido";
+            break;
+        case 'EN':
+            $bienvenido="Welcome";
+            break;
+        case 'JP':
+            $bienvenido="ようこそ";
+            break;
+        default:
+            $bienvenido="Bienvenido";
+            break;
+    }
+    $bienvenido .= " ".$_SESSION["descripcion"];
 }
 ?>
 <!DOCTYPE html>
@@ -24,14 +57,20 @@ if (isset($_REQUEST["cerrarSesion"])) {
 <body>
     <!-- 😼 -->
     <header>
-        <h1>Login Logoff Tema 5</h1><h2>Programa</h2>
+        <h1>Login Logoff Tema 5</h1>
+        <h2>Programa</h2>
+        <div>
+            <form id="login" action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
+            </form>
+        </div>
     </header>
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
+            <h2><?= $bienvenido ?></h2>
             <div>
                 <input type="submit" value="Detalle" name="detalle">
-                <input type="submit" value="Cerrar Sesion" name="cerrarSesion">
             </div>
         </form>
     </main>
