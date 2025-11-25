@@ -38,11 +38,6 @@ if (empty($_COOKIE["idioma"])) {
                 <input type="radio" name="idioma" id="JP" value="JP">
             </form>
             <script>
-                /* document.querySelectorAll('#idiomas > label[for]').forEach(label => {
-                    label.addEventListener('click', () => {
-                        document.getElementById('idiomas').submit();
-                    });
-                }); */
                 const form = document.getElementById('idiomas');
                 document.querySelectorAll('input[name="idioma"]').forEach(radio => {
                 radio.addEventListener('change', () => form.submit());
