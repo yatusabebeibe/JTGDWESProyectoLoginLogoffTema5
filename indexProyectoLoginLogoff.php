@@ -4,12 +4,13 @@ if (isset($_REQUEST["login"])) {
     header("Location: $sArchivoLogin");
 }
 if (!empty($_REQUEST["idioma"])) {
-    setcookie("idioma", $_REQUEST["idioma"]);
+    setcookie("idioma", $_REQUEST["idioma"], 60*60);
     header("Location: .");
     exit;
 }
 if (empty($_COOKIE["idioma"])) {
-    setcookie("idioma", "ES");
+    setcookie("idioma", "ES", 60*60);
+    header("Location: " . $_SERVER["PHP_SELF"]);
 }
 ?>
 
@@ -40,7 +41,7 @@ if (empty($_COOKIE["idioma"])) {
             <script>
                 const form = document.getElementById('idiomas');
                 document.querySelectorAll('input[name="idioma"]').forEach(radio => {
-                radio.addEventListener('change', () => form.submit());
+                    radio.addEventListener('change', () => form.submit());
                 });
             </script>
             <form id="login" action=<?= $_SERVER["PHP_SELF"];?> method="post">

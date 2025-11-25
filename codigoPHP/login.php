@@ -11,7 +11,7 @@ if (isset($_REQUEST["cancelar"])) {
     exit;
 }
 if (empty($_COOKIE["idioma"])) {
-    setcookie("idioma", "ES");
+    setcookie("idioma", "ES", 60*60);
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
