@@ -4,15 +4,23 @@
  *  @since 20/11/2025
  */
 
+session_start();
+
+if (empty($_SESSION["usuario"])) {
+    session_destroy();
+    header("Location: ./login.php");
+    exit;
+}
 if (isset($_REQUEST["volver"])) {
     header("Location: ./programa.php");
     exit;
 }
 if (isset($_REQUEST["cerrarSesion"])) {
+    session_destroy();
     header("Location: ../");
     exit;
-    if (empty($_COOKIE["idioma"])) {
 }
+if (empty($_COOKIE["idioma"])) {
     setcookie("idioma", "ES");
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit;

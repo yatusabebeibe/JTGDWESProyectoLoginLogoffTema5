@@ -4,11 +4,19 @@
  *  @since 20/11/2025
  */
 
+session_start();
+
+if (empty($_SESSION["usuario"])) {
+    session_destroy();
+    header("Location: ./login.php");
+    exit;
+}
 if (isset($_REQUEST["detalle"])) {
     header("Location: ./detalle.php");
     exit;
 }
 if (isset($_REQUEST["cerrarSesion"])) {
+    session_destroy();
     header("Location: ../");
     exit;
 }
@@ -35,6 +43,7 @@ if (!empty($_COOKIE["idioma"])) {
             $bienvenido="Bienvenido";
             break;
     }
+    $bienvenido .= " ".$_SESSION["descripcion"];
 }
 ?>
 <!DOCTYPE html>
