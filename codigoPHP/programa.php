@@ -27,23 +27,34 @@ if (empty($_COOKIE["idioma"])) {
     exit;
 }
 
-$bienvenido="";
+$decirSaludo="Bienvenido _";
+$decirConexiones = "Esta el la _ vez que se conecta";
+$decirFechaUltConex = "Usted se conectó por última vez el {día} de {mes} de {año} a las {horas:minutos}";
 if (!empty($_COOKIE["idioma"])) {
+    $numConexiones = $_SESSION["numConexiones"] ?? 1;
+    $fechaUltConex = $_SESSION["ultimaConexion"] ?? date("Y-m-d H:i:s");
+    $timestamp = strtotime($fechaUltConex);
+
     switch ($_COOKIE["idioma"]) {
         case 'ES':
-            $bienvenido="Bienvenido";
+            setlocale(LC_TIME, 'es_ES.UTF-8');
+            $decirSaludo = "Bienvenido " . $_SESSION["descripcion"];
+            $decirConexiones = "Esta es la " . $numConexiones . " vez que se conecta";
+            $decirFechaUltConex = "Usted se conectó por última vez el " . strftime("%d de %B de %Y a las %H:%M", $timestamp);
             break;
         case 'EN':
-            $bienvenido="Welcome";
+            setlocale(LC_TIME, 'en_US.UTF-8');
+            $decirSaludo = "Welcome " . $_SESSION["descripcion"];
+            $decirConexiones = "This is the " . $numConexiones . "th time you have logged in.";
+            $decirFechaUltConex = "Your last login was on " . strftime("%d %B %Y at %H:%M", $timestamp);
             break;
         case 'JP':
-            $bienvenido="ようこそ";
-            break;
-        default:
-            $bienvenido="Bienvenido";
+            setlocale(LC_TIME, 'ja_JP.UTF-8');
+            $decirSaludo = "ようこそ " . $_SESSION["descripcion"];
+            $decirConexiones = $numConexiones . "回目のログインです";
+            $decirFechaUltConex = "最後の接続は " . strftime("%d日%B%Y年 %H:%M", $timestamp) . " です"; // si no esta instalado el japonés en el sistema, el mes se muestra en inglés por defecto
             break;
     }
-    $bienvenido .= " ".$_SESSION["descripcion"];
 }
 ?>
 <!DOCTYPE html>
@@ -68,7 +79,9 @@ if (!empty($_COOKIE["idioma"])) {
     <!-- 😼 -->
     <main>
         <form action=<?php echo $_SERVER["PHP_SELF"];?> method="post">
-            <h2><?= $bienvenido ?></h2>
+            <h2><?= $decirSaludo ?></h2>
+            <h3><?= $decirConexiones ?></h3>
+            <h3><?= $decirFechaUltConex ?></h3>
             <div>
                 <input type="submit" value="Detalle" name="detalle">
             </div>
