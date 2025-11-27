@@ -4,24 +4,44 @@
  *  @since 20/11/2025
  */
 
+// Iniciamos la sesión
 session_start();
 
+// Comprobamos si no hay usuario en sesión
 if (empty($_SESSION["usuario"])) {
+
+    // Si no hay sesión activa, destruimos cualquier sesión existente
     session_destroy();
+
+    // Redirigimos al login
     header("Location: ./login.php");
     exit;
 }
+
+// Comprobamos si se ha pulsado el botón 'volver'
 if (isset($_REQUEST["volver"])) {
+
+    // Redirigimos al programa principal
     header("Location: ./programa.php");
     exit;
 }
+
+// Comprobamos si se ha pulsado el botón para cerrar sesion
 if (isset($_REQUEST["cerrarSesion"])) {
+
+    // Destruimos la sesión
     session_destroy();
+
+    // Redirigimos a la página principal
     header("Location: ../");
     exit;
 }
 if (empty($_COOKIE["idioma"])) {
+
+    // Creamos la cookie 'idioma' con valor 'ES' y duración de 1 hora
     setcookie("idioma", "ES", time() + 60*60);
+
+    // Recargamos la página para que la cookie esté disponible
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
@@ -56,6 +76,7 @@ if (empty($_COOKIE["idioma"])) {
             </div>
         </form>
         <?php
+            // Creamos un array con las superglobales para recorrerlas fácilmente
             $variablesSuperglobales = [
                 '_SESSION' => $_SESSION ?? [], // Lo crea si no esta creado
                 '_COOKIE' => $_COOKIE,
@@ -66,16 +87,26 @@ if (empty($_COOKIE["idioma"])) {
                 '_FILES' => $_FILES,
                 '_ENV' => $_ENV
             ];
+
+            // Recorremos cada superglobal
             foreach ($variablesSuperglobales as $nombresVariables=>$variables) {
                 echo "<div class='center $nombresVariables'>";
-                echo "<h2>" . $nombresVariables . "</h2>";
-                echo "<table><tr>";
+                echo "<h2>" . $nombresVariables . "</h2>"; // Mostramos el nombre de la superglobal
+                echo "<table><tr>"; // Creamos la tabla para mostrar sus valores
                 foreach ($variables as $valor => $datos) {
-                    echo '<tr><td class="e">'.$valor.'</td><td class="v">'.$datos.'</td></tr>';
+
+                    // Si el valor no es string, lo convertimos a string usando print_r
+                    if (is_array($valor) || is_object($valor)) {
+                        $valor = print_r($valor, true);
+                    }
+
+                    // Mostramos cada clave y su valor en la tabla
+                    echo '<tr><td class="e">' . $clave . '</td><td class="v">' . $valor . '</td></tr>';
                 }
                 echo "</tr></table>";
                 echo "</div>";
             }
+            // Mostramos la información completa de PHP
             echo "<div>".phpinfo()."</div>";
         ?>
     </main>
