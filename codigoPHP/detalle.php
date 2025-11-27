@@ -97,11 +97,12 @@ if (empty($_COOKIE["idioma"])) {
 
                     // Si el valor no es string, lo convertimos a string usando print_r
                     if (is_array($datos) || is_object($datos)) {
-                        $datos = print_r($datos, true);
+                        // Usamos nl2br para convertir los `/n` en `<br>` y que haya saltos de linea
+                        $datos = "<pre>" . nl2br(print_r($datos, true)) . "</pre>"; 
                     }
 
                     // Mostramos cada clave y su valor en la tabla
-                    echo '<tr><td class="e">' . $valor . '</td><td class="v">' . $datos . '</td></tr>';
+                    echo '<tr><td class="e">' . $valor . '</td><td class="v">' . $datos . '</pre></td></tr>';
                 }
                 echo "</tr></table>";
                 echo "</div>";
