@@ -1,16 +1,33 @@
 <?php
+// Comprobamos si se ha pulsado el botón 'login'
 if (isset($_REQUEST["login"])) {
+
+    // Definimos la ruta del archivo de login
     $sArchivoLogin = "./codigoPHP/login.php";
+
+    // Redirigimos al archivo de login
     header("Location: $sArchivoLogin");
     exit;
 }
+
+// Comprobamos si se ha enviado un idioma por formulario
 if (!empty($_REQUEST["idioma"])) {
+
+    // Creamos la cookie 'idioma' con el valor enviado y duración de 1 hora
     setcookie("idioma", $_REQUEST["idioma"], time() + 60*60);
+
+    // Recargamos la página principal para aplicar el cambio de idioma
     header("Location: .");
     exit;
 }
+
+// Si no existe la cookie de idioma
 if (empty($_COOKIE["idioma"])) {
+
+    // la creamos con valor por defecto 'ES'
     setcookie("idioma", "ES", time() + 60*60);
+
+    // Recargamos la página para que la cookie esté disponible
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
