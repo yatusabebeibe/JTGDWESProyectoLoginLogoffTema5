@@ -48,13 +48,13 @@ if (empty($_COOKIE["idioma"])) {
         <h2>Inicio Publico</h2>
         <div style="text-align: center;">
             <form id="idiomas" method="post">
-                <label for="ES"><img src="./webroot/images/flags/ES.png" alt="Español"></label>
+                <label for="ES" <?=  $_COOKIE["idioma"]=="ES" ? "seleccionado" : "" ?>><img src="./webroot/images/flags/ES.png" alt="Español"></label>
                 <input type="radio" name="idioma" id="ES" value="ES">
 
-                <label for="EN"><img src="./webroot/images/flags/EN.png" alt="Inglés"></label>
+                <label for="EN" <?=  $_COOKIE["idioma"]=="EN" ? "seleccionado" : "" ?>><img src="./webroot/images/flags/EN.png" alt="Inglés"></label>
                 <input type="radio" name="idioma" id="EN" value="EN">
 
-                <label for="JP"><img src="./webroot/images/flags/JP.png" alt="Japonés"></label>
+                <label for="JP" <?=  $_COOKIE["idioma"]=="JP" ? "seleccionado" : "" ?>><img src="./webroot/images/flags/JP.png" alt="Japonés"></label>
                 <input type="radio" name="idioma" id="JP" value="JP">
             </form>
             <script>
