@@ -69,7 +69,8 @@ if (empty($_COOKIE["idioma"])) {
         </div>
     </header>
     <!-- 😼 -->
-    <main>
+    <main style="text-align: center;">
+        <img src="./webroot/images/modelo.png" alt="" style="max-height: 650px;">
     </main>
     <!-- 😼 -->
     <footer>
