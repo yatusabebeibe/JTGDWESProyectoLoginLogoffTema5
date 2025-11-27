@@ -4,40 +4,69 @@
  *  @since 20/11/2025
  */
 
+// Iniciamos la sesión
 session_start();
 
+// Comprobamos si no hay usuario en sesión
 if (empty($_SESSION["usuario"])) {
+
+    // Si no hay sesión activa, destruimos cualquier sesión existente
     session_destroy();
+
+    // Redirigimos al login
     header("Location: ./login.php");
     exit;
 }
+
+// Comprobamos si se ha pulsado el botón 'detalle'
 if (isset($_REQUEST["detalle"])) {
+
+    // Redirigimos a la página de detalle
     header("Location: ./detalle.php");
     exit;
 }
+
+// Comprobamos si se ha pulsado el botón 'cerrarSesion'
 if (isset($_REQUEST["cerrarSesion"])) {
+
+    // Destruimos la sesión
     session_destroy();
+
+    // Redirigimos a la página principal
     header("Location: ../");
     exit;
 }
 
+// Comprobamos si no existe la cookie de idioma
 if (empty($_COOKIE["idioma"])) {
+
+    // Creamos la cookie 'idioma' con valor 'ES' y duración de 1 hora
     setcookie("idioma", "ES", time() + 60*60);
+
+    // Recargamos la página para que la cookie esté disponible
     header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
 
+// Mensajes por defecto antes de personalizar según idioma
 $decirSaludo="Bienvenido _";
 $decirConexiones = "Esta el la _ vez que se conecta";
 $decirFechaUltConex = "Usted se conectó por última vez el {día} de {mes} de {año} a las {horas:minutos}";
+
+// Si existe la cookie de idioma, personalizamos los mensajes
 if (!empty($_COOKIE["idioma"])) {
+
+    // Número de conexiones y fecha de última conexión desde la sesión
     $numConexiones = $_SESSION["numConexiones"];
     $fechaUltConex = $_SESSION["ultimaConexion"] ?? null;
+
+    // Convertimos la fecha a timestamp para usar con strftime
     $timestamp = strtotime($fechaUltConex);
 
+    // Elegimos el idioma según la cookie
     switch ($_COOKIE["idioma"]) {
         case 'ES':
-            setlocale(LC_TIME, 'es_ES.UTF-8');
+            setlocale(LC_TIME, 'es_ES.UTF-8'); // Configuramos el locale en español
             $decirSaludo = "Bienvenido " . $_SESSION["descripcion"];
             $decirConexiones = "Esta es la " . $numConexiones . " vez que se conecta";
             $decirFechaUltConex = $timestamp 
@@ -45,7 +74,7 @@ if (!empty($_COOKIE["idioma"])) {
                 : "Usted no se había conectado antes";
             break;
         case 'EN':
-            setlocale(LC_TIME, 'en_US.UTF-8');
+            setlocale(LC_TIME, 'en_US.UTF-8'); // Configuramos el locale en inglés
             $decirSaludo = "Welcome " . $_SESSION["descripcion"];
             $decirConexiones = "This is the " . $numConexiones . "th time you have logged in.";
             $decirFechaUltConex = $timestamp 
@@ -53,7 +82,7 @@ if (!empty($_COOKIE["idioma"])) {
                 : "You have not logged in before";
             break;
         case 'JP':
-            setlocale(LC_TIME, 'ja_JP.UTF-8');
+            setlocale(LC_TIME, 'ja_JP.UTF-8'); // Configuramos locale en japonés
             $decirSaludo = "ようこそ " . $_SESSION["descripcion"];
             $decirConexiones = $numConexiones . "回目のログインです";
             $decirFechaUltConex = $timestamp 
