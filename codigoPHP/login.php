@@ -27,7 +27,7 @@ if (empty($_COOKIE["idioma"])) {
 }
 
 // Comprobamos si ya hay un usuario en sesión
-if (!empty($_SESSION["usuario"])) {
+if (!empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
 
     // Si ya hay sesión iniciada, redirigimos al programa principal
     header("Location: ./programa.php");
@@ -104,11 +104,13 @@ if (isset($_REQUEST["entrar"])) {
             session_start();
 
             // Guardamos los datos del usuario en la sesión
-            $_SESSION["usuario"] = $usuario->{aColumnasUsuario["Codigo"]};
-            $_SESSION["descripcion"] = $usuario->{aColumnasUsuario["Descripcion"]};
-            $_SESSION["numConexiones"] = $usuario->{aColumnasUsuario["NumConexiones"]}+1;
-            $_SESSION["ultimaConexion"] = $usuario->{aColumnasUsuario["UltimaConexion"]};
-            $_SESSION["conexionActual"] = $usuario->{"conexionActual"};
+            $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = [
+                "usuario"        => $usuario->{aColumnasUsuario["Codigo"]},
+                "descripcion"    => $usuario->{aColumnasUsuario["Descripcion"]},
+                "numConexiones"  => $usuario->{aColumnasUsuario["NumConexiones"]} + 1,
+                "ultimaConexion" => $usuario->{aColumnasUsuario["UltimaConexion"]},
+                "conexionActual" => $usuario->{"conexionActual"}
+            ];
 
             // Creamos la consulta SQL para actualizar el número de conexiones y la fecha de última conexión
             $actualizacion = <<<EOF

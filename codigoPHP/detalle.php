@@ -8,7 +8,7 @@
 session_start();
 
 // Comprobamos si no hay usuario en sesión
-if (empty($_SESSION["usuario"])) {
+if (empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
 
     // Si no hay sesión activa, destruimos cualquier sesión existente
     session_destroy();
@@ -96,12 +96,12 @@ if (empty($_COOKIE["idioma"])) {
                 foreach ($variables as $valor => $datos) {
 
                     // Si el valor no es string, lo convertimos a string usando print_r
-                    if (is_array($valor) || is_object($valor)) {
-                        $valor = print_r($valor, true);
+                    if (is_array($datos) || is_object($datos)) {
+                        $datos = print_r($datos, true);
                     }
 
                     // Mostramos cada clave y su valor en la tabla
-                    echo '<tr><td class="e">' . $clave . '</td><td class="v">' . $valor . '</td></tr>';
+                    echo '<tr><td class="e">' . $valor . '</td><td class="v">' . $datos . '</td></tr>';
                 }
                 echo "</tr></table>";
                 echo "</div>";

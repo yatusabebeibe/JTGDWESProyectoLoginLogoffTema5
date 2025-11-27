@@ -8,7 +8,7 @@
 session_start();
 
 // Comprobamos si no hay usuario en sesión
-if (empty($_SESSION["usuario"])) {
+if (empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
 
     // Si no hay sesión activa, destruimos cualquier sesión existente
     session_destroy();
