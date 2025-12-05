@@ -6,20 +6,23 @@
         https://mclibre.org/consultar/php/lecciones/php-constantes.html
 */
 
-const DBHost = "10.199.11.252";
+const DBHost = "10.199.11.252"; // desarrollo
+// const DBHost = "localhost"; // explotación
 
 // admin
 const DBUserRoot = "adminsql";
-const DBPassRoot = "paso";
+const DBPassRoot = "paso"; // desarrollo
+// const DBPassRoot = "!Paso1234x"; // explotación
 const DSNRoot = "mysql:host=".DBHost;
 
 // usuario
 const DBName = "DBJTGDWESProyectoLoginLogoffTema5";
 const DBUser = "userJTGDWESProyectoLoginLogoffTema5";
-const DBPass = "paso";
+const DBPass = "paso"; // desarrollo
+// const DBPass = "!Paso1234x"; // explotación
 const DSN = "mysql:host=".DBHost.";dbname=".DBName;
 
-// Arrays con el nombre de las columnas que vamos a seleccionar
+// Array con el nombre de las columnas que vamos a seleccionar
 const aColumnasUsuario = [
     "Codigo" => "T01_CodUsuario",
     "Password" => "T01_Password",
@@ -32,7 +35,7 @@ const aColumnasUsuario = [
 const aColumnasDepartamento = [
     "Codigo" => "T02_CodDepartamento",
     "Descripcion" => "T02_DescDepartamento",
-    "FechaCreacion" => "T02_FechaCreacionDepartamento",
     "Volumen" => "T02_VolumenDeNegocio",
+    "FechaCreacion" => "T02_FechaCreacionDepartamento",
     "FechaBaja" => "T02_FechaBajaDepartamento"
 ];
