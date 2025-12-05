@@ -62,7 +62,7 @@ if (isset($_REQUEST["entrar"])) {
             aColumnasUsuario["Descripcion"],    // Descripción o nombre
             aColumnasUsuario["NumConexiones"],  // Número de conexiones
             aColumnasUsuario["UltimaConexion"], // Fecha de última conexión
-            "NOW() as conexionActual"           // Fecha/hora actual
+            "NOW() as FechaHoraConexionActual"           // Fecha/hora actual
         ];
 
         // Convertimos el array de columnas en un string separado por comas
@@ -105,11 +105,11 @@ if (isset($_REQUEST["entrar"])) {
 
             // Guardamos los datos del usuario en la sesión
             $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = [
-                "usuario"        => $usuario->{aColumnasUsuario["Codigo"]},
-                "descripcion"    => $usuario->{aColumnasUsuario["Descripcion"]},
-                "numConexiones"  => $usuario->{aColumnasUsuario["NumConexiones"]} + 1,
-                "ultimaConexion" => $usuario->{aColumnasUsuario["UltimaConexion"]},
-                "conexionActual" => $usuario->{"conexionActual"}
+                ltrim(aColumnasUsuario["Codigo"], "T01_") => $usuario->{aColumnasUsuario["Codigo"]},
+                ltrim(aColumnasUsuario["Descripcion"], "T01_") => $usuario->{aColumnasUsuario["Descripcion"]},
+                ltrim(aColumnasUsuario["NumConexiones"], "T01_") => $usuario->{aColumnasUsuario["NumConexiones"]} + 1,
+                ltrim(aColumnasUsuario["UltimaConexion"], "T01_") => $usuario->{aColumnasUsuario["UltimaConexion"]},
+                "FechaHoraConexionActual" => $usuario->FechaHoraConexionActual
             ];
 
             // Creamos la consulta SQL para actualizar el número de conexiones y la fecha de última conexión
@@ -160,7 +160,7 @@ if (isset($_REQUEST["entrar"])) {
             <label class="tituloCampo">Usuario:</label>
             <!-- Ponemos los valores del array respuesta para que el usuario no tenga que escribirlo de nuevo en caso de error -->
             <input type="text" name="usuario" value="<?= $encontrado ? "" : $aRespuestas['usuario'] ?>" obligatorio>
-            
+
             <label class="tituloCampo">Contraseña:</label>
             <!-- Ponemos los valores del array respuesta para que el usuario no tenga que escribirlo de nuevo en caso de error -->
             <input type="password" name="contraseña" value="<?= $encontrado ? "" : $aRespuestas['contraseña'] ?>" obligatorio>
