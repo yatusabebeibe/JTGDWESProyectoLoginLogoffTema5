@@ -103,12 +103,14 @@ if (isset($_REQUEST["entrar"])) {
             // Iniciamos la sesión
             session_start();
 
+            $fechaUltimaConexion = $usuario->{aColumnasUsuario["UltimaConexion"]};
+
             // Guardamos los datos del usuario en la sesión
             $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"] = [
                 ltrim(aColumnasUsuario["Codigo"], "T01_") => $usuario->{aColumnasUsuario["Codigo"]},
                 ltrim(aColumnasUsuario["Descripcion"], "T01_") => $usuario->{aColumnasUsuario["Descripcion"]},
                 ltrim(aColumnasUsuario["NumConexiones"], "T01_") => $usuario->{aColumnasUsuario["NumConexiones"]} + 1,
-                ltrim(aColumnasUsuario["UltimaConexion"], "T01_") => new DateTime($usuario->{aColumnasUsuario["UltimaConexion"]}),
+                ltrim(aColumnasUsuario["UltimaConexion"], "T01_") => $fechaUltimaConexion ? new DateTime($fechaUltimaConexion) : null,
                 "FechaHoraConexionActual" => new DateTime($usuario->FechaHoraConexionActual)
             ];
 

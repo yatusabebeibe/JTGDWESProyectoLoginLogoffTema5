@@ -71,7 +71,7 @@ if (!empty($_COOKIE["idioma"])) {
         case 'ES':
             setlocale(LC_TIME, 'es_ES.UTF-8'); // Configuramos el locale en español
             $decirSaludo = "Bienvenido " . $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"][ltrim(aColumnasUsuario["Descripcion"], "T01_")];
-            $decirConexiones = "Esta es la " . $numConexiones . " vez que se conecta";
+            $decirConexiones = "Esta es la " . $numConexiones . "ª vez que se conecta";
             $decirFechaUltConex = $timestamp
                 ? "Usted se conectó por última vez el " . strftime("%d de %B de %Y a las %H:%M", $timestamp)
                 : "Usted no se había conectado antes";
