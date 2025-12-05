@@ -108,8 +108,8 @@ if (isset($_REQUEST["entrar"])) {
                 ltrim(aColumnasUsuario["Codigo"], "T01_") => $usuario->{aColumnasUsuario["Codigo"]},
                 ltrim(aColumnasUsuario["Descripcion"], "T01_") => $usuario->{aColumnasUsuario["Descripcion"]},
                 ltrim(aColumnasUsuario["NumConexiones"], "T01_") => $usuario->{aColumnasUsuario["NumConexiones"]} + 1,
-                ltrim(aColumnasUsuario["UltimaConexion"], "T01_") => $usuario->{aColumnasUsuario["UltimaConexion"]},
-                "FechaHoraConexionActual" => $usuario->FechaHoraConexionActual
+                ltrim(aColumnasUsuario["UltimaConexion"], "T01_") => new DateTime($usuario->{aColumnasUsuario["UltimaConexion"]}),
+                "FechaHoraConexionActual" => new DateTime($usuario->FechaHoraConexionActual)
             ];
 
             // Creamos la consulta SQL para actualizar el número de conexiones y la fecha de última conexión

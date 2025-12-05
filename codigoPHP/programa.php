@@ -64,7 +64,7 @@ if (!empty($_COOKIE["idioma"])) {
     $fechaUltConex = $_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"][ltrim(aColumnasUsuario["UltimaConexion"], "T01_")] ?? null;
 
     // Convertimos la fecha a timestamp para usar con strftime
-    $timestamp = strtotime($fechaUltConex);
+    $timestamp = $fechaUltConex ? $fechaUltConex->getTimestamp() : false;
 
     // Elegimos el idioma según la cookie
     switch ($_COOKIE["idioma"]) {
