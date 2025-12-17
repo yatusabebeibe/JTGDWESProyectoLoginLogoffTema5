@@ -13,9 +13,6 @@ require_once("../config/confDBPDO.php");
 // Comprobamos si no hay usuario en sesión
 if (empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
 
-    // Si no hay sesión activa, destruimos cualquier sesión existente
-    session_destroy();
-
     // Redirigimos al login
     header("Location: ./login.php");
     exit;

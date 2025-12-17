@@ -10,9 +10,6 @@ session_start();
 // Comprobamos si no hay usuario en sesión
 if (empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
 
-    // Si no hay sesión activa, destruimos cualquier sesión existente
-    session_destroy();
-
     // Redirigimos al login
     header("Location: ./login.php");
     exit;
@@ -34,15 +31,6 @@ if (isset($_REQUEST["cerrarSesion"])) {
 
     // Redirigimos a la página principal
     header("Location: ../");
-    exit;
-}
-if (empty($_COOKIE["idioma"])) {
-
-    // Creamos la cookie 'idioma' con valor 'ES' y duración de 1 hora
-    setcookie("idioma", "ES", time() + 60*60);
-
-    // Recargamos la página para que la cookie esté disponible
-    header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
 ?>

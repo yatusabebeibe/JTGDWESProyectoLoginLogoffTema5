@@ -2,11 +2,8 @@
 // Comprobamos si se ha pulsado el botón 'login'
 if (isset($_REQUEST["login"])) {
 
-    // Definimos la ruta del archivo de login
-    $sArchivoLogin = "./codigoPHP/login.php";
-
     // Redirigimos al archivo de login
-    header("Location: $sArchivoLogin");
+    header("Location: ./codigoPHP/login.php");
     exit;
 }
 
@@ -17,7 +14,7 @@ if (!empty($_REQUEST["idioma"])) {
     setcookie("idioma", $_REQUEST["idioma"], time() + 60*60);
 
     // Recargamos la página principal para aplicar el cambio de idioma
-    header("Location: .");
+    header("Location: " . $_SERVER["PHP_SELF"]);
     exit;
 }
 

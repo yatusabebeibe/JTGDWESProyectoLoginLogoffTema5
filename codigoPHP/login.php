@@ -4,9 +4,6 @@
  *  @since 20/11/2025
  */
 
-// Iniciamos la sesión
-session_start();
-
 // Comprobamos si se ha pulsado el botón 'cancelar'
 if (isset($_REQUEST["cancelar"])) {
 
@@ -15,16 +12,8 @@ if (isset($_REQUEST["cancelar"])) {
     exit;
 }
 
-// Comprobamos si no existe la cookie de idioma
-if (empty($_COOKIE["idioma"])) {
-
-    // Iniciamos la cookie 'idioma' con valor 'ES' y duración de 1 hora (3600 segundos)
-    setcookie("idioma", "ES", time() + 60*60);
-
-    // Recargamos la página para que la cookie esté disponible
-    header("Location: " . $_SERVER["PHP_SELF"]);
-    exit;
-}
+// Iniciamos la sesión
+session_start();
 
 // Comprobamos si ya hay un usuario en sesión
 if (!empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
@@ -33,7 +22,7 @@ if (!empty($_SESSION["usuarioDAWJTGProyectoLoginLogoffTema5"])) {
     header("Location: ./programa.php");
     exit;
 } else {
-    // Si no hay sesión, abortamos la sesión actual para evitar problemas al crearla más tarde
+    // Si no hay sesión, abortamos la sesión actual para evitar posibles problemas al crearla más tarde
     session_abort();
 }
 
