@@ -20,7 +20,7 @@ header {
     align-items: center;
     flex-direction: row;
     gap: 50px;
-    
+
     & > h1, > h2 {font-size: 2em;}
 }
 h1, h3, p {
@@ -104,7 +104,7 @@ footer {
     text-align: center;
     height: var(--altoFooter);
     color: white;
-    
+
     a {
         text-decoration: aquamarine wavy underline;
         color: aquamarine;
@@ -117,7 +117,7 @@ footer {
     }
     p {line-height: 30px; display: inline-block;}
     span {margin-right: 15px;}
-    img { 
+    img {
         display: inline-block;
         height: calc(var(--altoFooter)/2);
         translate: 0 25%;
@@ -148,7 +148,7 @@ form {
             width: 100%;
 
             cursor: pointer;
-            
+
             font-size: 16px;
             line-height: 14px;
             text-decoration: none;

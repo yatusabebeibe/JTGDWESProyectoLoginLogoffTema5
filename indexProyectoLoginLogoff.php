@@ -71,10 +71,10 @@ if (empty($_COOKIE["idioma"])) {
     </main>
     <!-- 😼 -->
     <footer>
-        <span><a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoff/" target="_blank">
+        <span><a href="https://github.com/yatusabebeibe/JTGDWESProyectoLoginLogoffTema5/" target="_blank">
             <img src="./webroot/images/github.svg">
         </a></span>
-        <p><a href="../../" target="_self">Jesús Temprano Gallego</a> | 20/11/2025</p>
+        <p><a href="../../" target="_self">Jesús Temprano Gallego</a> | 17/12/2025</p>
     </footer>
     <!-- 😼 -->
     <!-- muxixima glasia alvelto pol el marivilliosiximo achetemeele que te paxo chatgepete -->
